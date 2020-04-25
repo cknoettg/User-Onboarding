@@ -8,6 +8,15 @@ const Form = props => {
   const formSubmit = e => {
     e.preventDefault();
     console.log("submitted");
+
+    //add our POST request
+    axios
+      .post("https://reqres.in/api/users", formState)
+      .then(res => {
+        setPost(res.data); // get just the form data from the REST api
+        console.log("success", res);
+      })
+      .catch(err => console.log(err.response));
   };
 
   //this is our state
