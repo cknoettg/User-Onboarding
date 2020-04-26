@@ -9,8 +9,8 @@ function App() {
 
   return (
     <div className="App">
-      <Form user={user} setUser={setUser} />
-    </div>
+      <Form user={user} setUser={setUser} />   
+    </div>    
   );
 }
 

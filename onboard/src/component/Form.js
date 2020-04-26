@@ -23,6 +23,7 @@ const Form = props => {
         console.log("success", res);
       })
       .catch(err => console.log(err.response));
+
   }; //end of formSubmit
 
   //this is our state
@@ -35,6 +36,7 @@ const Form = props => {
 
   // State for the error messages
   const [errors, setErrors] = useState({
+    name: "",
     email: "",
     password: "",
     terms: ""
@@ -99,18 +101,21 @@ const Form = props => {
     }; //end of inputChange
 
     return (
-      <form>
+      <form onSubmit={formSubmit}>
         <label htmlFor="name">
-          Name
-            <input type="email" name="email" placeholder="Email" />
+          <input type="name" name="name" placeholder="Name" />   
         </label>
         <label htmlFor="email">
-            <input type="password" name="password" placeholder="Password" />
+          <input type="email" name="email" placeholder="Email" />
+        </label>
+        <label htmlFor="password">
+          <input type="password" name="password" placeholder="Password" />
         </label>
         <label htmlFor="terms">
           Do you agree to the terms and conditions?
           <input type="checkbox"></input>
-        </label>        
+        </label>
+        <pre>{JSON.stringify(post, null, 2)}</pre>        
         <button>Submit!</button>
       </form>
     ); //end of return
