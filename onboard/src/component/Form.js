@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
-import axios from 'axios';
+import axios from "axios";
 
 
 const Form = props => {
   // console.log("this is our props",props);
 
+  //state for our post request
+  const [post, setPost] = useState([]);
+  //state for our Button state - initialize to true or false?
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   //submit button function
   const formSubmit = e => {
     e.preventDefault();
@@ -52,9 +56,10 @@ const Form = props => {
       // required isn't required for checkboxes.
   });
 
-  //useState
+  
   /* Each time the form value state is updated, check to see if it is valid per our schema. 
   This will allow us to enable/disable the submit button.*/
+  
   useEffect(() => {
     /* We pass the entire state into the entire schema, no need to use reach here. 
     We want to make sure it is all valid before we allow a user to submit
