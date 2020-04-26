@@ -2,14 +2,42 @@ import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import axios from "axios";
 
+//Yum validation
+const formSchema = Yup.object().shape({
+  name: Yup
+    .string()
+    .required("Name is required."),
+  email: Yup
+    .string()
+    .email("Must be a valid email address.")
+    .required("Must include email address."),
+  password: Yup
+    .string()
+    .min(6, "Passwords must be at least 6 characters long.")
+    .required("Password is Required"),
+  terms: Yup
+    .boolean()
+    .oneOf([true], "You must accept Terms and Conditions")
+    // required isn't required for checkboxes.
+});
 
 const Form = props => {
   // console.log("this is our props",props);
+  
+  //this is our state
+  const [formState, setFormState] = useState({
+    name: "",
+    email: "",
+    password: "",
+    terms: ""
+  });
 
   //state for our post request
   const [post, setPost] = useState([]);
+
   //state for our Button state - initialize to true or false?
   const [buttonDisabled, setButtonDisabled] = useState(false);
+  
   //submit button function
   const formSubmit = e => {
     e.preventDefault();
@@ -21,18 +49,18 @@ const Form = props => {
       .then(res => {
         setPost(res.data); // get just the form data from the REST api
         console.log("success", res);
+
+        //setFormState
+        setFormState({
+        name: "",
+        email: "",
+        password: "",
+        terms: ""
+        });
       })
       .catch(err => console.log(err.response));
-
+    
   }; //end of formSubmit
-
-  //this is our state
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    password: "",
-    terms: ""
-  });
 
   // State for the error messages
   const [errors, setErrors] = useState({
@@ -42,23 +70,6 @@ const Form = props => {
     terms: ""
   });
 
-  //Yum validation
-  const formSchema = Yup.object().shape({
-    email: Yup
-      .string()
-      .email("Must be a valid email address.")
-      .required("Must include email address."),
-    password: Yup
-      .string()
-      .min(6, "Passwords must be at least 6 characters long.")
-      .required("Password is Required"),
-    terms: Yup
-      .boolean()
-      .oneOf([true], "You must accept Terms and Conditions")
-      // required isn't required for checkboxes.
-  });
-
-  
   /* Each time the form value state is updated, check to see if it is valid per our schema. 
   This will allow us to enable/disable the submit button.*/
   
@@ -98,25 +109,52 @@ const Form = props => {
           [e.target.name]: err.errors[0]
         });
       });
+
+      const newFormData = {
+        ...formState,
+        [e.target.name]:
+          e.target.type === "checkbox" ? e.target.checked : e.target.value
+      };
+      
+      setFormState(newFormData);
     }; //end of inputChange
 
     return (
       <form onSubmit={formSubmit}>
         <label htmlFor="name">
-          <input type="name" name="name" placeholder="Name" />   
+          Name
+          <input id="name" 
+          type="text" 
+          name="name" 
+          value={formState.name}
+          onChange={inputChange} />   
         </label>
         <label htmlFor="email">
-          <input type="email" name="email" placeholder="Email" />
+        Email
+        <input
+          id="email"
+          type="text"
+          name="email"
+          value={formState.email}
+          onChange={inputChange}
+        />
         </label>
         <label htmlFor="password">
-          <input type="password" name="password" placeholder="Password" />
+          Password
+          <input
+          id="password"
+          type="text"
+          name="password"
+          value={formState.password}
+          onChange={inputChange}
+        />        
         </label>
         <label htmlFor="terms">
           Do you agree to the terms and conditions?
           <input type="checkbox"></input>
         </label>
         <pre>{JSON.stringify(post, null, 2)}</pre>        
-        <button>Submit!</button>
+        <button disabled={buttonDisabled}>Submit!</button>
       </form>
     ); //end of return
   
