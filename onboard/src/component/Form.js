@@ -36,7 +36,7 @@ const Form = props => {
   const [post, setPost] = useState([]);
 
   //state for our Button state - initialize to true or false?
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   
   //submit button function
   const formSubmit = e => {
@@ -58,7 +58,7 @@ const Form = props => {
         terms: ""
         });
       })
-      .catch(err => console.log(err.response));
+      .catch(err => console.log(err.res));
     
   }; //end of formSubmit
 
@@ -151,7 +151,13 @@ const Form = props => {
         </label>
         <label htmlFor="terms">
           Do you agree to the terms and conditions?
-          <input type="checkbox"></input>
+          <input 
+          id="terms"
+          type="checkbox"
+          name="terms"
+          value={formState.terms}
+          onChange={inputChange}
+          />
         </label>
         <pre>{JSON.stringify(post, null, 2)}</pre>        
         <button disabled={buttonDisabled}>Submit!</button>
