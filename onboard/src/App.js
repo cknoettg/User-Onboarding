@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import './component/Form';
+import Form from './component/Form';
 
 function App() {
+
+  const [user, setUser] = useState([]);
+
   return (
     <div className="App">
-      
+      <Form user={user} setUser={setUser} />
     </div>
   );
 }

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
+import axios from 'axios';
+
 
 const Form = props => {
   // console.log("this is our props",props);
@@ -17,7 +19,7 @@ const Form = props => {
         console.log("success", res);
       })
       .catch(err => console.log(err.response));
-  };
+  }; //end of formSubmit
 
   //this is our state
   const [formState, setFormState] = useState({
@@ -70,7 +72,7 @@ const Form = props => {
 
     // yup.reach will allow us to "reach" into the schema and test only one part.
     // We give reach the schema as the first argument, and the key we want to test as the second.
-    yup
+    Yup
       .reach(formSchema, e.target.name)
       //we can then run validate using the value
       .validate(e.target.value)
@@ -89,7 +91,8 @@ const Form = props => {
           [e.target.name]: err.errors[0]
         });
       });
-  //if needed: function LoginForm() {
+    }; //end of inputChange
+
     return (
       <form>
         <label htmlFor="name">
@@ -105,8 +108,8 @@ const Form = props => {
         </label>        
         <button>Submit!</button>
       </form>
-    );
+    ); //end of return
   
-}};
+}; //end of Form
 
 export default Form;
