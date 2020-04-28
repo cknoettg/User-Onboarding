@@ -17,8 +17,11 @@ const formSchema = Yup.object().shape({
     .required("Password is Required"),
   terms: Yup
     .boolean()
-    .oneOf([true], "You must accept Terms and Conditions")
+    .oneOf([true], "You must accept Terms and Conditions"),
     // required isn't required for checkboxes.
+  role: Yup
+    .string()
+    .required("Role is required.")
 });
 
 const Form = props => {
@@ -29,7 +32,8 @@ const Form = props => {
     name: "",
     email: "",
     password: "",
-    terms: ""
+    terms: "",
+    role: ""
   });
 
   //state for our post request
@@ -55,7 +59,8 @@ const Form = props => {
         name: "",
         email: "",
         password: "",
-        terms: ""
+        terms: "",
+        role: ""
         });
       })
       .catch(err => console.log(err.res));
@@ -67,7 +72,8 @@ const Form = props => {
     name: "",
     email: "",
     password: "",
-    terms: ""
+    terms: "",
+    role: ""
   });
 
   /* Each time the form value state is updated, check to see if it is valid per our schema. 
@@ -159,6 +165,15 @@ const Form = props => {
           onChange={inputChange}
           />
         </label>
+        <label htmlFor="role">
+          Please select a Role
+          <select id="role" name="role" onChange={inputChange}>
+            <option value="Team Leader">Team Leader</option>
+            <option value="React I">React I</option>
+            <option value="React II">React II</option>
+            <option value="Training">Training</option>
+          </select>
+        </label> 
         <pre>{JSON.stringify(post, null, 2)}</pre>        
         <button disabled={buttonDisabled}>Submit!</button>
       </form>
