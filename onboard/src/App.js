@@ -4,11 +4,9 @@ import Form from './component/Form';
 
 function App() {
 
-  const [user, setUser] = useState([]);
-
   return (
     <div className="App">
-      <Form user={user} setUser={setUser} />   
+      <Form /> 
     </div>    
   );
 }
