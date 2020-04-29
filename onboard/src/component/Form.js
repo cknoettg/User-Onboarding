@@ -10,7 +10,7 @@ const formSchema = Yup.object().shape({
   email: Yup
     .string()
     .email("Must be a valid email address.")
-    .matches(/"^waffle@syrup.com$"/, "That email is already taken.")
+    //.matches(/\Bwaffle@syrup\B/, "That email is already taken.")
     .required("Must include email address."),
   password: Yup
     .string()
@@ -22,7 +22,15 @@ const formSchema = Yup.object().shape({
     // required isn't required for checkboxes.
   role: Yup
     .string()
-    .required("Role is required.")
+    .required("Role is required."),
+  bio: Yup
+    .string()
+    .required("You must enter a Bio."),
+  // suffix: Yup
+  // .boolean(),
+  gpa: Yup
+    .string()
+    .required("GPA is required.")
 });
 
 const Form = props => {
@@ -34,7 +42,10 @@ const Form = props => {
     email: "",
     password: "",
     terms: "",
-    role: ""
+    role: "",
+    bio: "",
+    //suffix: "",
+    gpa: ""
   });
 
   //state for our post request
@@ -61,7 +72,10 @@ const Form = props => {
         email: "",
         password: "",
         terms: "",
-        role: ""
+        role: "",
+        bio: "",
+        //suffix: "",
+        gpa: ""
         });
       })
       .catch(err => console.log(err.res));
@@ -74,7 +88,10 @@ const Form = props => {
     email: "",
     password: "",
     terms: "",
-    role: ""
+    role: "",
+    bio: "",
+    //suffix: "",
+    gpa: ""
   });
 
   /* Each time the form value state is updated, check to see if it is valid per our schema. 
@@ -149,7 +166,6 @@ const Form = props => {
         {errors.email.length > 0 ? (
           <p className="error">{errors.email}</p>
         ) : null}
-        {errors.email.match("waffle@syrup.com") ? <p className="error">{errors.email}</p> : null}
         </label>
         <label htmlFor="password">
           Password
@@ -159,7 +175,8 @@ const Form = props => {
           name="password"
           value={formState.password}
           onChange={inputChange}
-        />        
+        />   
+        {errors.password.length > 0 ? <p className="error">{errors.password}</p> : null}     
         </label>
         <label htmlFor="terms">
           Do you agree to the terms and conditions?
@@ -180,6 +197,40 @@ const Form = props => {
             <option value="Training">Training</option>
           </select>
         </label> 
+        <label htmlFor="bio">
+          Bio
+          <textarea 
+          name="bio" 
+          value={formState.bio}
+          onChange={inputChange} />
+          {errors.bio.length > 0 ? <p className="error">{errors.bio}</p> : null}
+        </label>
+        {/* <label htmlFor="suffix">
+          Suffix
+          Jr
+          <input 
+          type="radio" 
+          value="Jr"
+          name="suffix" 
+          value={formState.suffix}
+          onChange={inputChange} />
+          Sr
+          <input 
+          type="radio" 
+          value="Sr"
+          name="suffix" 
+          value={formState.suffix}
+          onChange={inputChange} />
+        </label> */}
+        <label htmlFor="gpa">
+          GPA
+          <input id="gpa" 
+          type="text" 
+          name="gpa" 
+          value={formState.gpa}
+          onChange={inputChange} />
+          {errors.gpa.length > 0 ? <p className="error">{errors.gpa}</p> : null}
+        </label>
         <pre>{JSON.stringify(post, null, 2)}</pre>        
         <button disabled={buttonDisabled}>Submit!</button>
       </form>
