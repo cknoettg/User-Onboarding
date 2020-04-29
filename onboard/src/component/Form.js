@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import axios from "axios";
+import "./Form.css";
 
 //Yum validation
 const formSchema = Yup.object().shape({
@@ -211,8 +212,7 @@ const Form = props => {
           <input 
           type="radio" 
           value="Jr"
-          name="suffix" 
-          onChange={inputChange}
+          name="suffix"
           />
           Sr
           <input 
