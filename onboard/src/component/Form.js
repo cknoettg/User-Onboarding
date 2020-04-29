@@ -10,6 +10,7 @@ const formSchema = Yup.object().shape({
   email: Yup
     .string()
     .email("Must be a valid email address.")
+    .matches(/"^waffle@syrup.com$"/, "That email is already taken.")
     .required("Must include email address."),
   password: Yup
     .string()
@@ -133,7 +134,8 @@ const Form = props => {
           type="text" 
           name="name" 
           value={formState.name}
-          onChange={inputChange} />   
+          onChange={inputChange} />
+          {errors.name.length > 0 ? <p className="error">{errors.name}</p> : null}
         </label>
         <label htmlFor="email">
         Email
@@ -144,6 +146,10 @@ const Form = props => {
           value={formState.email}
           onChange={inputChange}
         />
+        {errors.email.length > 0 ? (
+          <p className="error">{errors.email}</p>
+        ) : null}
+        {errors.email.match("waffle@syrup.com") ? <p className="error">{errors.email}</p> : null}
         </label>
         <label htmlFor="password">
           Password
