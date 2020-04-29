@@ -1,4 +1,37 @@
 form {
     display: flex;
     flex-direction: column;
+    margin-top: 2%;
+}
+
+label {
+    background-color: lightblue;
+    width: 40%;
+    padding: 2%;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+.error {
+    color: red;
+}
+
+button {
+    height: 50px;
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+button:disabled{
+    background-color: orchid;
+}
+
+pre {
+    background-color: black;
+    color: green;
+    width: 40%;
+    padding: 2%;
+    margin: 0 auto;
+    margin-top: 2%;
 }

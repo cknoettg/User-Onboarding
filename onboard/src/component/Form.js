@@ -146,8 +146,8 @@ const Form = props => {
 
     return (
       <form onSubmit={formSubmit}>
-        <label htmlFor="name">
-          Name
+        <label htmlFor="name" className="name">
+          Name<br></br>
           <input id="name" 
           type="text" 
           name="name" 
@@ -155,8 +155,8 @@ const Form = props => {
           onChange={inputChange} />
           {errors.name.length > 0 ? <p className="error">{errors.name}</p> : null}
         </label>
-        <label htmlFor="email">
-        Email
+        <label htmlFor="email" className="email">
+        Email<br></br>
         <input
           id="email"
           type="text"
@@ -169,7 +169,7 @@ const Form = props => {
         ) : null}
         </label>
         <label htmlFor="password">
-          Password
+          Password<br></br>
           <input
           id="password"
           type="text"
@@ -190,7 +190,7 @@ const Form = props => {
           />
         </label>
         <label htmlFor="role">
-          Please select a Role
+          Please select a Role<br></br>
           <select id="role" name="role" onChange={inputChange}>
             <option value="Team Leader">Team Leader</option>
             <option value="React I">React I</option>
@@ -199,7 +199,7 @@ const Form = props => {
           </select>
         </label> 
         <label htmlFor="bio">
-          Bio
+          Bio<br></br>
           <textarea 
           name="bio" 
           value={formState.bio}
@@ -207,7 +207,7 @@ const Form = props => {
           {errors.bio.length > 0 ? <p className="error">{errors.bio}</p> : null}
         </label>
         <label htmlFor="suffix">
-          Suffix
+          Suffix<br></br>
           Jr
           <input 
           type="radio" 
@@ -222,7 +222,7 @@ const Form = props => {
           />
         </label>
         <label htmlFor="gpa">
-          GPA
+          GPA<br></br>
           <input id="gpa" 
           type="text" 
           name="gpa" 
