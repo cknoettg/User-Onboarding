@@ -26,8 +26,8 @@ const formSchema = Yup.object().shape({
   bio: Yup
     .string()
     .required("You must enter a Bio."),
-  // suffix: Yup
-  // .boolean(),
+  suffix: Yup
+  .string(),
   gpa: Yup
     .string()
     .required("GPA is required.")
@@ -44,7 +44,7 @@ const Form = props => {
     terms: "",
     role: "",
     bio: "",
-    //suffix: "",
+    suffix: "",
     gpa: ""
   });
 
@@ -74,7 +74,7 @@ const Form = props => {
         terms: "",
         role: "",
         bio: "",
-        //suffix: "",
+        suffix: "",
         gpa: ""
         });
       })
@@ -90,7 +90,7 @@ const Form = props => {
     terms: "",
     role: "",
     bio: "",
-    //suffix: "",
+    suffix: "",
     gpa: ""
   });
 
@@ -205,23 +205,22 @@ const Form = props => {
           onChange={inputChange} />
           {errors.bio.length > 0 ? <p className="error">{errors.bio}</p> : null}
         </label>
-        {/* <label htmlFor="suffix">
+        <label htmlFor="suffix">
           Suffix
           Jr
           <input 
           type="radio" 
           value="Jr"
           name="suffix" 
-          value={formState.suffix}
-          onChange={inputChange} />
+          onChange={inputChange}
+          />
           Sr
           <input 
           type="radio" 
           value="Sr"
           name="suffix" 
-          value={formState.suffix}
-          onChange={inputChange} />
-        </label> */}
+          />
+        </label>
         <label htmlFor="gpa">
           GPA
           <input id="gpa" 
